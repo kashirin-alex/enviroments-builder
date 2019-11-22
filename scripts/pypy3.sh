@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='pypy3.6-v7.1.1-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy3.6-v7.1.1-src.tar.bz2';
+tn='pypy3.6-v7.2.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy3.6-v7.2.0-src.tar.bz2';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
@@ -9,7 +9,7 @@ sed -i 's/ncurses/ncursesw/g' pypy/module/_minimal_curses/fficurses.py;
 cd pypy/goal;
 export VERBOSE=1;
 export LDFLAGS="-DTCMALLOC_MINIMAL -ltcmalloc_minimal -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free"
-export CFLAGS="$ADD_O_FS $LDFLAGS -DNDEBUG"
+export CFLAGS="$ADD_O_FS $LDFLAGS"
 export CPPFLAGS="$ADD_O_FS $LDFLAGS"
 export INCLUDEDIRS="-I$CUST_INST_PREFIX/include"
 (

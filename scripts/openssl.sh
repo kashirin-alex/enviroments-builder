@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='openssl-1.1.0j'; url='http://www.openssl.org/source/openssl-1.1.0j.tar.gz';
+tn='openssl-1.1.1d'; url='http://www.openssl.org/source/openssl-1.1.1d.tar.gz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 

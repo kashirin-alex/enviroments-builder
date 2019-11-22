@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='Python-2.7.16'; url='http://www.python.org/ftp/python/2.7.16/Python-2.7.16.tar.xz';
+tn='Python-2.7.17'; url='http://www.python.org/ftp/python/2.7.17/Python-2.7.17.tar.xz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
@@ -68,7 +68,7 @@ if [ -f $CUST_INST_PREFIX/bin/pip ] && [ $stage -ne 0 ]; then
 	
 	#$PIP_INSTALL pythonninja;
 	#$PIP_INSTALL pythonhttp://chromium.googlesource.com/external/gyp/+archive/master.tar.gz;
-	$PIP_INSTALL pythonCython
+	$PIP_INSTALL python Cython
 fi
 
 export LDFLAGS=""

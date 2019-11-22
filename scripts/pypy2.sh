@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='pypy2.7-v7.1.1-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy2.7-v7.1.1-src.tar.bz2';
+tn='pypy2.7-v7.2.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy2.7-v7.2.0-src.tar.bz2';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
@@ -9,7 +9,7 @@ sed -i 's/ncurses/ncursesw/g' pypy/module/_minimal_curses/fficurses.py;
 cd pypy/goal;
 export VERBOSE=1;
 export LDFLAGS="-DTCMALLOC_MINIMAL -ltcmalloc_minimal -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free"
-export CFLAGS="$ADD_O_FS $LDFLAGS -DNDEBUG"
+export CFLAGS="$ADD_O_FS $LDFLAGS"
 export CPPFLAGS="$ADD_O_FS $LDFLAGS"
 export INCLUDEDIRS="-I$CUST_INST_PREFIX/include"
 (
@@ -66,7 +66,7 @@ if [ -f 'pypy-c' ]; then
 	$PIP_INSTALL pypy webp 
 	$PIP_INSTALL pypy Pillow Wand
 	$PIP_INSTALL pypy weasyprint==0.42.3
-	$PIP_INSTALL pypy brotli pylzma rarfile zopfli  #zipfile pysnappy
+	$PIP_INSTALL pypy brotli pylzma rarfile zopfli zstd #zipfile pysnappy
 	$PIP_INSTALL pypy ply slimit
 	$PIP_INSTALL pypy guess_language
 	$PIP_INSTALL pypy paypalrestsdk #pygeocoder python-google-places
@@ -78,6 +78,8 @@ if [ -f 'pypy-c' ]; then
 	$PIP_INSTALL pypy http://github.com/kashirin-alex/PyHelpers/archive/master.zip
 	
 	STDCXX=17 $PIP_INSTALL pypy --verbose cppyy
+	$PIP_INSTALL pypy objgraph
+	
 fi
 
 

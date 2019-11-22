@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='Python-3.8.0a3'; url='http://www.python.org/ftp/python/3.8.0/Python-3.8.0a3.tar.xz';
+tn='Python-3.8.0b4'; url='http://www.python.org/ftp/python/3.8.0/Python-3.8.0b4.tar.xz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
@@ -7,7 +7,7 @@ if [ $only_dw == 1 ];then return;fi
 	#rm_os_pkg $sn;
 # fi
 config_dest;`src_path`/configure CFLAGS="-P $ADD_O_FS" CPPFLAGS="-P $ADD_O_FS" \
-				--with-system-expat --with-system-ffi --with-ensurepip=install --with-computed-gotos 
+				--with-system-expat --with-system-ffi --with-ensurepip=install --with-computed-gotos \
 				--enable-shared --enable-optimizations --enable-ipv6 --with-lto --with-pymalloc --prefix=$CUST_INST_PREFIX; 
 do_make build_all;do_make install;
 mv $CUST_INST_PREFIX/include/python3.8m / $CUST_INST_PREFIX/include/python3.8
@@ -19,24 +19,22 @@ if [ -f $CUST_INST_PREFIX/bin/python3 ]; then
 fi
 source /etc/profile;source ~/.bashrc;ldconfig;
 
-(cd $SOURCES_PATH/boost;
-./bootstrap.sh --with-python=`_install_prefix`/bin/python3.8 --prefix=`_install_prefix`;
-./b2 --with-python  threading=multi link=shared runtime-link=shared install;)
 
 export VERBOSE=1;
+
+rm -rf ~/.cache/pip 
+
 export LDFLAGS="-DTCMALLOC_MINIMAL -ltcmalloc_minimal -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free"
 export CFLAGS="$ADD_O_FS $LDFLAGS -DNDEBUG"
 export CPPFLAGS="$ADD_O_FS $LDFLAGS"
 export INCLUDEDIRS="-I$CUST_INST_PREFIX/include"
-
-if [ -f /usr/bin/py3_pip ] && [ $stage -ne 0 ]; then
 	
-	rm -rf ~/.cache/pip 
+$PIP_INSTALL python3 setuptools
+$PIP_INSTALL python3 pip
+$PIP_INSTALL python3 setuptools
+$PIP_INSTALL python3 meson ninja 
 
-	$PIP_INSTALL python3 setuptools
-	$PIP_INSTALL python3 pip
-	$PIP_INSTALL python3 setuptools
-
+#if [ -f /usr/bin/py3_pip ] && [ $stage -ne 0 ]; then
 	$PIP_INSTALL python3 cffi 
 	$PIP_INSTALL python3 greenlet
 	$PIP_INSTALL python3 psutil deepdiff
@@ -64,8 +62,12 @@ if [ -f /usr/bin/py3_pip ] && [ $stage -ne 0 ]; then
 
 	$PIP_INSTALL python3 http://github.com/kashirin-alex/libpyhdfs/archive/master.zip
 	$PIP_INSTALL python3 http://github.com/kashirin-alex/PyHelpers/archive/master.zip
+	
+	(cd $SOURCES_PATH/boost;
+	./bootstrap.sh --with-python=`_install_prefix`/bin/python3.8 --prefix=`_install_prefix`;
+	./b2 --with-python  threading=multi link=shared runtime-link=shared install;)
 
-fi
+#fi
 
 export LDFLAGS=""
 export CFLAGS=""
