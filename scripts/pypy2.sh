@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='pypy2.7-v7.2.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy2.7-v7.2.0-src.tar.bz2';
+tn='pypy2.7-v7.3.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy2.7-v7.3.0-src.tar.bz2';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
@@ -50,7 +50,12 @@ if [ -f 'pypy-c' ]; then
 
 	$PIP_INSTALL pypy cffi 
 	$PIP_INSTALL pypy greenlet
-	$PIP_INSTALL pypy psutil deepdiff
+	 
+	wget https://github.com/giampaolo/psutil/archive/release-5.7.0.tar.gz; tar -xf release-5.7.0.tar.gz;
+	sed -i 's/platform.python_implementation()/PY3 and platform.python_implementation()/g' psutil-release-5.7.0/psutil/_compat.py;
+	$PIP_INSTALL pypy psutil-release-5.7.0/
+	
+	$PIP_INSTALL pypy deepdiff # psutil
 	$PIP_INSTALL pypy xlrd lxml	
 	with_gmp=no $PIP_INSTALL pypy pycrypto 
 	$PIP_INSTALL pypy cryptography

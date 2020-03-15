@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='gcc-9.2.0'; url='http://ftp.gnu.org/gnu/gcc/gcc-9.2.0/gcc-9.2.0.tar.xz'; 
+tn='gcc-9.3.0'; url='http://ftp.gnu.org/gnu/gcc/gcc-9.3.0/gcc-9.3.0.tar.xz'; 
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 

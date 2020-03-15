@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-tn='Python-3.8.0b4'; url='http://www.python.org/ftp/python/3.8.0/Python-3.8.0b4.tar.xz';
+tn='Python-3.9.0a4'; url='https://www.python.org/ftp/python/3.9.0/Python-3.9.0a4.tar.xz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
-# if [ ! -f $CUST_INST_PREFIX/bin/python3 ]; then
+# if [ ! -f $CUST_INST_PREFIX/bin/python3 ]; then # if not netplan
 	#rm_os_pkg $sn;
 # fi
 config_dest;`src_path`/configure CFLAGS="-P $ADD_O_FS" CPPFLAGS="-P $ADD_O_FS" \

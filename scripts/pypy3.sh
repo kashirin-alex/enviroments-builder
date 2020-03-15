@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='pypy3.6-v7.2.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy3.6-v7.2.0-src.tar.bz2';
+tn='pypy3.6-v7.3.0-src'; url='http://bitbucket.org/pypy/pypy/downloads/pypy3.6-v7.3.0-src.tar.bz2';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 
