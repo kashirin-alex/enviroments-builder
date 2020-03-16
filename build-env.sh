@@ -1258,8 +1258,8 @@ if [ $build_target == 'node' ];then
 fi
 config_dest;cmake `src_path` $ht_opts -DHT_O_LEVEL=6 -DTHRIFT_SOURCE_DIR=$SOURCES_PATH/thrift -DCMAKE_INSTALL_PREFIX=/opt/hypertable -DCMAKE_BUILD_TYPE=Release -DINSTALL_EXCLUDE_DEPENDENT_LIBS=ON;
 do_make;do_make install;##  -DUSE_JEMALLOC=ON  -DPACKAGE_OS_SPECIFIC=1  -DVERSION_MISC_SUFFIX=$( date  +"%Y-%m-%d_%H-%M") # php,java,rb,tl,js,py3,pypy3,
-cp `_install_prefix`/lib/libsigar-amd64-linux.so /opt/hypertable/0.9.8.16/lib/
-env CTEST_OUTPUT_ON_FAILURE=1 make alltests; #if [ $test_make == 1 ];then make alltests; fi;
+cp `_install_prefix`/lib/libsigar-amd64-linux.so /opt/hypertable/0.9.8.17/lib/
+#env CTEST_OUTPUT_ON_FAILURE=1 make alltests; #if [ $test_make == 1 ];then make alltests; fi;
 		shift;;
 
 'llvm')
@@ -1975,8 +1975,8 @@ compile_and_install(){
 	if [ $only_dw == 1 ] || [ $stage -eq 3 ]; then
 		do_install pybind11;
 		do_install python pypy2 python3 pypy3 spdylay;
-		do_install ruby graphviz rrdtool;
 		do_install libevent thrift;
+		do_install ruby graphviz rrdtool;
 		do_install boost cronolog hypertable;
 	fi
 	# do_install folly fizz wangle;

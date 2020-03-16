@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-tn='Python-3.9.0a4'; url='https://www.python.org/ftp/python/3.9.0/Python-3.9.0a4.tar.xz';
+tn='Python-3.9.0a4'; url='http://www.python.org/ftp/python/3.9.0/Python-3.9.0a4.tar.xz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 

@@ -39,7 +39,7 @@ if [ -f $CUST_INST_PREFIX/bin/pip ] && [ $stage -ne 0 ]; then
 
 	$PIP_INSTALL python cffi 
 	$PIP_INSTALL python greenlet
-	$PIP_INSTALL python psutil deepdiff
+	$PIP_INSTALL python psutil==5.6.3 deepdiff
 	$PIP_INSTALL python xlrd lxml	
 	$PIP_INSTALL python pycrypto 
 	$PIP_INSTALL python cryptography
