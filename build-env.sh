@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ## Author Kashirin Alex (kashirin.alex@gmail.com)
 
-# nohup bash ~/builder/build-env.sh --sources all &> '/root/builder/built.log' &
+# nohup bash ~/builder/build-env.sh --sources thrift hypertable &> '/root/builder/built.log' &
 # bash ~/builder/build-env.sh --verbose --sources libeditline2 libgsasl libhdfspp 
 
 ################## DIRCETOTRIES CONFIGURATIONS ##################
@@ -673,14 +673,16 @@ do_make;do_make install-strip;do_make install;do_make all;
 		shift;;
 
 'glib')
-tn='glib-2.64.1'; url='http://download.gnome.org/sources/glib/2.64/glib-2.64.1.tar.xz';
+tn='glib-2.64.2'; url='http://download.gnome.org/sources/glib/2.64/glib-2.64.2.tar.xz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
-meson _build --optimization=3 --buildtype=release --prefix=`_install_prefix`;
-ninja -C _build
-ninja -C _build install
+meson _build --default-library static -Dselinux=disabled -Dinternal_pcre=false --optimization=3 --buildtype=release --prefix=`_install_prefix`;
+ninja -C _build install;
+rm -r _build;
+meson _build --default-library shared --optimization=3 --buildtype=release --prefix=`_install_prefix`;
+ninja -C _build install;
 		shift;;
-		
+	
 'glib_fallback')
 tn='glib-2.57.1'; url='http://download.gnome.org/sources/glib/2.57/glib-2.57.1.tar.xz';
 set_source 'tar';
@@ -1109,9 +1111,9 @@ tn='thrift-0.13.0'; url='http://archive.apache.org/dist/thrift/0.13.0/thrift-0.1
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 ./bootstrap.sh;
-opts=" ";
+opts="--with-cpp --with-c_glib ";
 if [ $build_target == 'node' ];then
-	opts="--without-ruby --without-perl --without-c_glib --without-php --without-nodejs";
+	opts="--without-ruby --without-perl  --without-php --without-nodejs"; #--without-c_glib
 fi
 ./configure CFLAGS="$ADD_O_FS" CXXFLAGS="$ADD_O_FS -fPIC" $opts --disable-tests --disable-tutorial --enable-shared=yes --enable-static=yes --prefix=`_install_prefix` --build=`_build`;
 do_make;do_make install;
@@ -1856,7 +1858,7 @@ make; make install;
 		shift;;	
 
 'asio')
-tn='asio-asio-1-14-0/asio'; url='http://github.com/chriskohlhoff/asio/archive/asio-1-14-0.tar.gz';
+tn='asio-asio-1-16-1/asio'; url='http://github.com/chriskohlhoff/asio/archive/asio-1-16-1.tar.gz';
 set_source 'tar';
 if [ $only_dw == 1 ];then return;fi
 ./autogen.sh;./configure;do_make install prefix=`_install_prefix`;
@@ -1975,9 +1977,9 @@ compile_and_install(){
 	if [ $only_dw == 1 ] || [ $stage -eq 3 ]; then
 		do_install pybind11;
 		do_install python pypy2 python3 pypy3 spdylay;
-		do_install libevent thrift;
+		do_install boost libevent thrift;
 		do_install ruby graphviz rrdtool;
-		do_install boost cronolog hypertable;
+		do_install cronolog hypertable;
 	fi
 	# do_install folly fizz wangle;
 } 

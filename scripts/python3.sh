@@ -43,9 +43,11 @@ $PIP_INSTALL python3 meson ninja
 	$PIP_INSTALL python3 cryptography
 	$PIP_INSTALL python3 pyopenssl #LDFLAGS="-L$CUST_INST_PREFIX/ssl/lib" CFLAGS="-I$CUST_INST_PREFIX/ssl/include" 
 	$PIP_INSTALL python3 pycryptodomex
+	$PIP_INSTALL python3 asn1crypto
 	
 	$PIP_INSTALL python3 pycparser
 	
+	$PIP_INSTALL python3 w3lib
 	$PIP_INSTALL python3 h2 #https://github.com/python-hyper/hyper-h2/archive/master.zip
 	$PIP_INSTALL python3 urllib3 dnspython
 	$PIP_INSTALL python3 linuxfd http://github.com/kashirin-alex/eventlet/archive/master.zip 

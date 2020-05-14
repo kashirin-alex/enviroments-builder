@@ -46,7 +46,9 @@ if [ -f $CUST_INST_PREFIX/bin/pip ] && [ $stage -ne 0 ]; then
 	$PIP_INSTALL python pyopenssl #LDFLAGS="-L$CUST_INST_PREFIX/ssl/lib" CFLAGS="-I$CUST_INST_PREFIX/ssl/include" 
 	$PIP_INSTALL python pycryptodomex
 	$PIP_INSTALL python pycparser
+	$PIP_INSTALL python asn1crypto
 	
+	$PIP_INSTALL python w3lib
 	$PIP_INSTALL python h2 #https://github.com/python-hyper/hyper-h2/archive/master.zip
 	$PIP_INSTALL python urllib3 dnspython
    	$PIP_INSTALL python linuxfd http://github.com/kashirin-alex/eventlet/archive/master.zip 

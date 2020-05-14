@@ -60,7 +60,9 @@ if [ -f 'pypy-c' ]; then
 	$PIP_INSTALL pypy pyopenssl #LDFLAGS="-L$CUST_INST_PREFIX/ssl/lib" CFLAGS="-I$CUST_INST_PREFIX/ssl/include" 
 
 	$PIP_INSTALL pypy pycryptodomex
+	$PIP_INSTALL pypy asn1crypto
 	
+	$PIP_INSTALL pypy w3lib
 	$PIP_INSTALL pypy h2 #https://github.com/python-hyper/hyper-h2/archive/master.zip
 	$PIP_INSTALL pypy urllib3 dnspython
 	$PIP_INSTALL pypy linuxfd http://github.com/kashirin-alex/eventlet/archive/master.zip 
